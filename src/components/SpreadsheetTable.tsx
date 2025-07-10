@@ -26,11 +26,11 @@ export default function SpreadsheetTable() {
   ];
 
   const initialData = [
-    ["Launch social media campaign for product", "15-11-2024", "In-process", "Aisha Patel", "www.aishapatel.com", "Sophie Choudhury", "Medium", "20-11-2024", "6,200,000 ₹"],
-    ["Update press kit for company redesign", "28-10-2024", "Need to start", "Irfan Khan", "www.irfankhan.com", "Tejas Pandey", "High", "30-10-2024", "3,500,000 ₹"],
-    ["Finalize user testing feedback for report", "05-12-2024", "In-process", "Mark Johnson", "www.markjohnson.com", "Rachel Lee", "Medium", "10-12-2024", "4,750,000 ₹"],
-    ["Design new features for the website", "10-01-2025", "Complete", "Emily Green", "www.emilygreen.com", "Tom Wright", "Low", "15-01-2025", "5,900,000 ₹"],
-    ["Prepare financial report for Q4", "25-01-2025", "Blocked", "Jessica Brown", "www.jessicabrown.com", "Kevin Smith", "Low", "30-01-2025", "2,800,000 ₹"],
+    ["Launch social media campaign for product", "15-11-2024", "In-process", "Aisha Patel", "www.aishapatel...", "Sophie Choudhury", "Medium", "20-11-2024", "6,200,000 ₹"],
+    ["Update press kit for company redesign", "28-10-2024", "Need to start", "Irfan Khan", "www.irfankhan...", "Tejas Pandey", "High", "30-10-2024", "3,500,000 ₹"],
+    ["Finalize user testing feedback for report", "05-12-2024", "In-process", "Mark Johnson", "www.markjohnson...", "Rachel Lee", "Medium", "10-12-2024", "4,750,000 ₹"],
+    ["Design new features for the website", "10-01-2025", "Complete", "Emily Green", "www.emilygreen...", "Tom Wright", "Low", "15-01-2025", "5,900,000 ₹"],
+    ["Prepare financial report for Q4", "25-01-2025", "Blocked", "Jessica Brown", "www.jessicabrown...", "Kevin Smith", "Low", "30-01-2025", "2,800,000 ₹"],
   ];
 
   const [tableData, setTableData] = useState([...initialData, ...Array.from({ length: 10 }, () => Array(9).fill(""))]);
