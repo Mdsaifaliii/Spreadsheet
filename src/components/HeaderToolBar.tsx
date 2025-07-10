@@ -7,7 +7,6 @@ import { EyeOff, LayoutGrid, Download, Upload, Plus } from "lucide-react";
 export default function HeaderToolbar() {
   return (
     <div className="flex items-center justify-between px-4 py-2 border-b bg-white text-sm">
-      =
       <div className="flex items-center gap-5 text-gray-700">
         <button className="flex items-center gap-1 text-gray-700 hover:text-black">
           Tool bar <MdDoubleArrow />

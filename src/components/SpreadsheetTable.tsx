@@ -1,6 +1,6 @@
+import { useState } from "react";
 import { IoLinkSharp } from "react-icons/io5";
 import { LuGitBranch } from "react-icons/lu";
-
 import {
   Globe,
   CalendarDays,
@@ -25,14 +25,15 @@ export default function SpreadsheetTable() {
     { label: "Est. Value", icon: Settings, group: "Extract", bg: "bg-orange-100", text: "text-orange-800" },
   ];
 
-  const data = [
+  const initialData = [
     ["Launch social media campaign for product", "15-11-2024", "In-process", "Aisha Patel", "www.aishapatel.com", "Sophie Choudhury", "Medium", "20-11-2024", "6,200,000 ₹"],
     ["Update press kit for company redesign", "28-10-2024", "Need to start", "Irfan Khan", "www.irfankhan.com", "Tejas Pandey", "High", "30-10-2024", "3,500,000 ₹"],
     ["Finalize user testing feedback for report", "05-12-2024", "In-process", "Mark Johnson", "www.markjohnson.com", "Rachel Lee", "Medium", "10-12-2024", "4,750,000 ₹"],
     ["Design new features for the website", "10-01-2025", "Complete", "Emily Green", "www.emilygreen.com", "Tom Wright", "Low", "15-01-2025", "5,900,000 ₹"],
     ["Prepare financial report for Q4", "25-01-2025", "Blocked", "Jessica Brown", "www.jessicabrown.com", "Kevin Smith", "Low", "30-01-2025", "2,800,000 ₹"],
-    ...Array.from({ length: 10 }, () => Array(9).fill(""))
   ];
+
+  const [tableData, setTableData] = useState([...initialData, ...Array.from({ length: 10 }, () => Array(9).fill(""))]);
 
   const getStatusBadge = (status: string) => {
     const base = "px-2 py-[2px] text-xs rounded-full font-medium";
@@ -52,12 +53,20 @@ export default function SpreadsheetTable() {
     return "";
   };
 
+  const handleCellEdit = (rowIndex: number, colIndex: number, newValue: string) => {
+    setTableData((prev) => {
+      const updated = [...prev];
+      updated[rowIndex][colIndex] = newValue;
+      return updated;
+    });
+  };
+
   return (
     <div className="w-full text-xs font-sans overflow-x-auto bg-white shadow-md rounded-lg border border-gray-200">
       <div className="flex items-center justify-between bg-[#f4f4f4] px-4 py-2 border-b">
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-1 bg-gray-200 px-3 py-1 rounded-md shadow-sm">
-        <IoLinkSharp />
+            <IoLinkSharp />
             <span className="font-medium text-sm text-gray-800">Q3 Financial Overview</span>
           </div>
           <div className="bg-gray-200 px-1.5 py-1 rounded-md shadow-sm">
@@ -70,10 +79,10 @@ export default function SpreadsheetTable() {
             <LuGitBranch /> ABC
           </span>
           <span className="bg-purple-100 text-purple-800 text-[10px] px-2 py-[2px] rounded-sm font-medium flex items-center gap-1">
-          <LuGitBranch /> Answer a question
+            <LuGitBranch /> Answer a question
           </span>
           <span className="bg-orange-100 text-orange-800 text-[10px] px-2 py-[2px] rounded-sm font-medium flex items-center gap-1">
-           <LuGitBranch /> Extract
+            <LuGitBranch /> Extract
           </span>
           <span className="text-xl font-semibold text-gray-500 cursor-pointer">+</span>
         </div>
@@ -95,17 +104,33 @@ export default function SpreadsheetTable() {
         ))}
       </div>
 
-      {data.map((row, rowIdx) => (
+      {tableData.map((row, rowIdx) => (
         <div key={rowIdx} className="flex w-full border-b">
           <div className="w-8 text-center py-2 border-r text-gray-400">{rowIdx + 1}</div>
           {row.map((cell, colIdx) => {
             if (colIdx === 2) {
-              return <div key={colIdx} className="w-[160px] px-3 py-1.5 border-r"><span className={getStatusBadge(cell)}>{cell}</span></div>;
+              return (
+                <div key={colIdx} className="w-[160px] px-3 py-1.5 border-r">
+                  <span className={getStatusBadge(cell)}>{cell}</span>
+                </div>
+              );
             }
             if (colIdx === 6) {
-              return <div key={colIdx} className={`w-[160px] px-3 py-1.5 border-r font-medium ${getPriorityClass(cell)}`}>{cell}</div>;
+              return (
+                <div key={colIdx} className={`w-[160px] px-3 py-1.5 border-r font-medium ${getPriorityClass(cell)}`}>{cell}</div>
+              );
             }
-            return <div key={colIdx} className="w-[160px] px-3 py-1.5 border-r text-gray-800">{cell}</div>;
+            return (
+              <div
+                key={colIdx}
+                contentEditable
+                suppressContentEditableWarning
+                className="w-[160px] px-3 py-1.5 border-r text-gray-800 focus:outline-none"
+                onBlur={(e) => handleCellEdit(rowIdx, colIdx, e.currentTarget.textContent || "")}
+              >
+                {cell}
+              </div>
+            );
           })}
         </div>
       ))}
