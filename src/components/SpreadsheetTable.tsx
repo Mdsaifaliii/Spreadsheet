@@ -88,7 +88,6 @@ export default function SpreadsheetTable() {
         </div>
       </div>
 
-      {/* Header */}
       <div className="flex w-full">
         <div className="w-8 bg-[#f4f4f4] border-r text-center text-gray-400 font-medium py-2">#</div>
         {columns.map((col, i) => (
