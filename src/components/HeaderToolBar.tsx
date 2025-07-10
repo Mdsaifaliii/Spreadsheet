@@ -7,9 +7,8 @@ import { EyeOff, LayoutGrid, Download, Upload, Plus } from "lucide-react";
 export default function HeaderToolbar() {
   return (
     <div className="flex items-center justify-between px-4 py-2 border-b bg-white text-sm">
-      {/* Left side buttons */}
+      =
       <div className="flex items-center gap-5 text-gray-700">
-        {/* Tool bar >> */}
         <button className="flex items-center gap-1 text-gray-700 hover:text-black">
           Tool bar <MdDoubleArrow />
         </button>
@@ -30,8 +29,6 @@ export default function HeaderToolbar() {
           <LayoutGrid className="w-4 h-4" /> Cell view
         </button>
       </div>
-
-      {/* Right side buttons */}
       <div className="flex items-center gap-2">
         <button className="flex items-center gap-1 border border-gray-300 rounded px-3 py-1.5 text-gray-700 hover:bg-gray-50">
           <Download className="w-4 h-4" /> Import
